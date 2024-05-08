@@ -14,7 +14,7 @@ const config: Config = {
   NODE_ENV: process.env.NODE_ENV || "development",
   JWT_SECRET:process.env.JWT_SECRET,
   APP_PORT: parseInt(process.env.APP_PORT) || 4000,
-  APP_ORIGINS: process.env.APP_ORIGINS?.split(",") || ["http://localhost:4000"],
+  APP_ORIGINS: process.env.APP_ORIGINS?.split(",") || ["http://localhost:4000","https://studio.apollographql.com"],
 };
 
 export default config;

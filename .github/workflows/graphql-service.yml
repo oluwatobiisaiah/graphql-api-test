@@ -1,0 +1,50 @@
+name: Deploy graphql-service
+
+on:
+  push:
+    branches: [dev]
+    paths:
+      - "graphql-service/**"
+  workflow_dispatch:
+jobs:
+  deploy-auth:
+    name: Deploy graphql-service
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "20"
+      - name: Install Serverless Framework
+        run: npm install -g serverless
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+
+      - name: Create env for graphql-service
+
+        run: |
+          cat > ./.env << EOF
+          NODE_ENV=staging
+
+          DEBUG=*
+          LOG_LEVEL="info"
+          DATABASE_URI=${{ secrets.DATABASE_URI }}
+          EOF
+
+      - name: Install NPM dependencies on graphql-service
+        run: npm install --only=prod && npm install @types/aws-serverless-express
+
+      - name: Build ts files on graphql-service
+        run: npm run compile
+
+      - name: Deploy Lambda functions on graphql-service
+        run: cd ./dist && serverless deploy --stage dev --region $AWS_DEFAULT_REGION
+
+
+      # Seed data if any
+      # - run: cd graphql-service/dist && sls invoke --function app -d db:seed:all --stage dev --region $AWS_DEFAULT_REGION

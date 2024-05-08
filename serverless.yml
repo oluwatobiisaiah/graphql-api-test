@@ -1,0 +1,49 @@
+service: graphql-v2-service
+configValidationMode: off
+useDotenv: false
+custom:
+  id: ${aws:accountId, '824404828953'}
+  domain: myapp.com
+  stage: ${opt:stage, self:provider.stage}
+provider:
+  name: aws
+  runtime: nodejs20.x
+  memorySize: 256
+  timeout: 30
+  httpApi:
+    cors: true
+  tags:
+    service: graphql-service
+    company: graphql
+    project: graphqlWeb
+  tracing:
+    apiGateway: true
+    lambda: true
+  logs:
+    graphql:
+      level: ERROR
+  # deploymentBucket:
+  #   name: ${self:custom.id}.${opt:region, 'us-east-2'}.deploys
+  iam:
+    role: arn:aws:iam::${self:custom.id}:role/serverless-lambda
+  iamRoleStatements:
+    - Effect: Allow
+      Action: 
+          - ses:*
+      Resource: '*'
+  # vpc: ${self:custom.vpc.${self:custom.stage}}
+
+functions:
+  graphql:
+    # Make sure your file path is correct!
+    # (e.g., if your file is in the root folder use server.graphqlHandler )
+    # The format is: <FILENAME>.<HANDLER>
+    handler: src/aws/lambda.handler # highlight-line
+    timeout: 300
+    events:
+      - httpApi:
+          path: /
+          method: POST
+      - httpApi:
+          path: /
+          method: GET
