@@ -11,7 +11,6 @@ import xssClean from 'xss-clean';
 import mongoose from "mongoose";
 
 const app = express();
-// const httpServer = http.createServer(app);
 const typeDefs = readFileSync('./schema.gql', { encoding: 'utf-8' });
 
 const server = new ApolloServer({ typeDefs, resolvers,
@@ -33,7 +32,6 @@ const server = new ApolloServer({ typeDefs, resolvers,
  });
  await server.start();
  app.use(xssClean());
-//  app.use(helmet());
  app.use('/graphql', cors<cors.CorsRequest>({origin:config.APP_ORIGINS}), express.json(), expressMiddleware(server));
 
  (async () => {
