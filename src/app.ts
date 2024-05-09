@@ -2,13 +2,11 @@ import { ApolloServer } from "@apollo/server"
 import { ApolloServerErrorCode } from '@apollo/server/errors';
 import { expressMiddleware } from '@apollo/server/express4';
 import { readFileSync } from "fs";
-import mongoose from "mongoose";
 import resolvers from "./resolvers/resolver.js";
 import config from "./config/config.js";
 import express from 'express';
 import cors from 'cors';
 import xssClean from 'xss-clean';
-import helmet from 'helmet';
 
 const app = express();
 // const httpServer = http.createServer(app);
