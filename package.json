@@ -39,6 +39,7 @@
     "mongodb": "^6.6.1",
     "mongoose": "^8.3.4",
     "serverless": "^3.38.0",
+    "serverless-http": "^3.2.0",
     "xss-clean": "^0.1.4"
   }
 }

@@ -8,6 +8,8 @@ import express from 'express';
 import cors from 'cors';
 import xssClean from 'xss-clean';
 
+import mongoose from "mongoose";
+
 const app = express();
 // const httpServer = http.createServer(app);
 const typeDefs = readFileSync('./schema.gql', { encoding: 'utf-8' });
@@ -34,5 +36,14 @@ const server = new ApolloServer({ typeDefs, resolvers,
 //  app.use(helmet());
  app.use('/graphql', cors<cors.CorsRequest>({origin:config.APP_ORIGINS}), express.json(), expressMiddleware(server));
 
-
+ (async () => {
+     try {
+        const connection = await mongoose.connect(config.DATABASE_URI);
+        // app.listen(config.APP_PORT, () => {
+        //    console.log(`🚀 Server ready at ${config.APP_PORT}`);
+        // });
+     } catch (error) {
+        console.log("Unable to start server", error);
+     }
+  })()
 export default app;
