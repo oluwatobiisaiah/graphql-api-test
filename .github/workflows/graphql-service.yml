@@ -2,7 +2,7 @@ name: Deploy graphql-service
 
 on:
   push:
-    branches: [dev]
+    branches: [main]
     paths:
       - "graphql-service/**"
   workflow_dispatch:
