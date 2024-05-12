@@ -1,9 +1,9 @@
 "use strict";
-import serverlessExpress from "@vendia/serverless-express";
+import { startServerAndCreateLambdaHandler, handlers } from '@as-integrations/aws-lambda';
+
 import app from "../app.js";
 
- const handler = serverlessExpress({ app });
-
-export  {
-  handler,
-};
+export const handler = startServerAndCreateLambdaHandler(
+  app,
+  handlers.createAPIGatewayProxyEventV2RequestHandler(),
+);

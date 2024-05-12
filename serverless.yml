@@ -9,7 +9,7 @@ provider:
   name: aws
   runtime: nodejs20.x
   memorySize: 256
-  timeout: 30
+  timeout: 300
   httpApi:
     cors: true
   tags:
@@ -38,7 +38,7 @@ functions:
     # Make sure your file path is correct!
     # (e.g., if your file is in the root folder use server.graphqlHandler )
     # The format is: <FILENAME>.<HANDLER>
-    handler: src/aws/lambda.handler # highlight-line
+    handler: src/aws/lambda.handler.handler # highlight-line
     timeout: 30
     events:
       - httpApi:

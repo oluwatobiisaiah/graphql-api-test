@@ -29,11 +29,10 @@ const server = new ApolloServer({ typeDefs, resolvers,
       return formattedError;
     },
  });
-server.startInBackgroundHandlingStartupErrorsByLoggingAndFailingAllRequests();
-const app = express();
+// const app = express();
 
- app.use(xssClean());
- app.use('/graphql', cors<cors.CorsRequest>({origin:config.APP_ORIGINS}), express.json(), expressMiddleware(server));
+//  app.use(xssClean());
+//  app.use('/graphql', cors<cors.CorsRequest>({origin:config.APP_ORIGINS}), express.json(), expressMiddleware(server));
 
  (async () => {
      try {
@@ -45,4 +44,4 @@ const app = express();
         console.log("Unable to start server", error);
      }
   })()
-export default app;
+export default server;
