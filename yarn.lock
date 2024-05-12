@@ -1112,6 +1112,11 @@
     binary-case "^1.0.0"
     type-is "^1.6.16"
 
+"@codegenie/serverless-express@^4.12.5":
+  version "4.14.1"
+  resolved "https://registry.yarnpkg.com/@codegenie/serverless-express/-/serverless-express-4.14.1.tgz#13d4570bc862d56cb5d53b7b818b6b1c9f57b432"
+  integrity sha512-B90/1OmA9mf9bEJnplLj7FGf+N2v2ikB68c/9W9uXmCa4ep/V00ymCiivwGLyeuzQRW33tcj4+KxZ2utfmu39Q==
+
 "@graphql-codegen/add@^5.0.2":
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/add/-/add-5.0.2.tgz#71b3ae0465a4537172dddb84531b6967ca5545f2"
@@ -2458,6 +2463,13 @@
     "@codegenie/serverless-express" "^3.4.1"
     binary-case "^1.0.0"
     type-is "^1.6.16"
+
+"@vendia/serverless-express@^4.12.6":
+  version "4.12.6"
+  resolved "https://registry.yarnpkg.com/@vendia/serverless-express/-/serverless-express-4.12.6.tgz#332a3c3e2c07069dbb8d3e95d69b23de2fe6dec2"
+  integrity sha512-ePsIPk3VQwgm5nh/JGBtTKQs5ZOF7REjHxC+PKk/CHvhlKQkJuUU365uPOlxuLJhC+BAefDznDRReWxpnKjmYg==
+  dependencies:
+    "@codegenie/serverless-express" "^4.12.5"
 
 "@whatwg-node/events@^0.0.3":
   version "0.0.3"
